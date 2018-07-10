@@ -98,7 +98,7 @@ $(function () {
          * a single .entry element within the .feed container.
          */
         it('should load feed entries', function () {
-            var entries = document.querySelectorAll('.feed a.entry-link article.entry');
+            var entries = document.querySelectorAll('.feed .entry');
 
             expect(entries).toBeDefined();
             expect(entries.length).toBeGreaterThan(0);
@@ -107,16 +107,27 @@ $(function () {
 
     describe('New Feed Selection', function () {
         var originalTimeout;
+        var firstFeed;
+        var secondFeed;
+
+        function getEntryElements() {
+            return document.querySelectorAll('.feed .entry');
+        }
 
         beforeEach(function(done){        
             // The unit test is loading 100+ entries and can 
             // occasionally timeout so we are increasing the
             // default timeout interval to account for this
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
-            loadFeed(3, function(){
-                done();
+            loadFeed(0, function(){
+                firstFeed = getEntryElements();
+
+                loadFeed(3, function(){
+                    secondFeed = getEntryElements();
+                    done();
+                });
             });
         });
 
@@ -128,10 +139,9 @@ $(function () {
          * by the loadFeed function that the content actually changes.
          */
         it('should load new entries when a different feed is selected', function () {
-            var entries = document.querySelectorAll('.feed a.entry-link article.entry');
-
-            expect(entries).toBeDefined();
-            expect(entries.length).toBeGreaterThan(0);
+            expect(firstFeed).toBeDefined();
+            expect(secondFeed).toBeDefined();
+            expect(firstFeed).not.toEqual(secondFeed);
         });
     });
 }());
