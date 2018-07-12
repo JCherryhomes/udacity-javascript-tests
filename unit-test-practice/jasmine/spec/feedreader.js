@@ -110,22 +110,17 @@ $(function () {
         var firstFeed;
         var secondFeed;
 
-        function getEntryElements() {
-            return document.querySelectorAll('.feed .entry');
-        }
-
         beforeEach(function(done){        
             // The unit test is loading 100+ entries and can 
             // occasionally timeout so we are increasing the
             // default timeout interval to account for this
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
             loadFeed(0, function(){
-                firstFeed = getEntryElements();
+                firstFeed = $('.feed').html();
 
-                loadFeed(3, function(){
-                    secondFeed = getEntryElements();
+                loadFeed(1, function(){
                     done();
                 });
             });
@@ -140,8 +135,7 @@ $(function () {
          */
         it('should load new entries when a different feed is selected', function () {
             expect(firstFeed).toBeDefined();
-            expect(secondFeed).toBeDefined();
-            expect(firstFeed).not.toEqual(secondFeed);
+            expect(firstFeed).not.toBe($('.feed').html());
         });
     });
 }());
