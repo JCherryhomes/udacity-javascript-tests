@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc overview
- * @name udaciMealsApp
+ * @name controllerQuizApp
  * @description
- * # udaciMealsApp
+ * # controllerQuizApp
  *
  * Main module of the application.
  */
 angular
-  .module('udaciMealsApp', []);
+  .module('controllerQuizApp', []);

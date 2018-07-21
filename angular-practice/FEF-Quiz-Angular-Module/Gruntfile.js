@@ -1,4 +1,4 @@
-// Generated on 2018-07-12 using generator-angular 0.16.0
+// Generated on 2016-01-24 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing
@@ -338,7 +338,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'udaciMealsApp',
+          module: 'newModuleQuizApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
